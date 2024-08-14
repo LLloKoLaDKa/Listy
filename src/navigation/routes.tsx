@@ -5,6 +5,8 @@ import { InitDataPage } from '@/pages/InitDataPage/InitDataPage';
 import { LaunchParamsPage } from '@/pages/LaunchParamsPage/LaunchParamsPage.tsx';
 import { ThemeParamsPage } from '@/pages/ThemeParamsPage/ThemeParamsPage.tsx';
 import { TONConnectPage } from '@/pages/TONConnectPage/TONConnectPage';
+import ListsPage from "@/pages/ListsPage/ListsPage.tsx";
+import {AddListPage} from "@/pages/AddListPage/AddListPage.tsx";
 
 interface Route {
   path: string;
@@ -15,6 +17,7 @@ interface Route {
 
 export const routes: Route[] = [
   { path: '/', Component: IndexPage },
+  { path: '/add', Component: AddListPage, title: 'Add List' },
   { path: '/init-data', Component: InitDataPage, title: 'Init Data' },
   { path: '/theme-params', Component: ThemeParamsPage, title: 'Theme Params' },
   { path: '/launch-params', Component: LaunchParamsPage, title: 'Launch Params' },
