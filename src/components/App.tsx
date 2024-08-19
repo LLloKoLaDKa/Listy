@@ -1,6 +1,6 @@
 import WebApp from '@twa-dev/sdk';
 import { AppRoot } from '@telegram-apps/telegram-ui';
-import { type FC, useEffect } from 'react';
+import React, { type FC, useEffect } from 'react';
 import {
   Navigate,
   Route,
@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom';
 
 import { routes } from '@/navigation/routes.tsx';
+import {MainLayout} from "@/MainLayout.tsx";
 
 function BackButtonManipulator() {
   const location = useLocation();
@@ -43,9 +44,12 @@ export const App: FC = () => (
   >
     <BrowserRouter>
       <BackButtonManipulator/>
+
       <Routes>
-        {routes.map((route) => <Route key={route.path} {...route} />)}
-        <Route path='*' element={<Navigate to='/'/>}/>
+        <Route element={<MainLayout/>} path='/'>
+            {routes.map((route) => <Route key={route.path} {...route}  />)}
+            {/*<Route path='*' element={<Navigate to='/'/>}/>*/}
+        </Route>
       </Routes>
     </BrowserRouter>
   </AppRoot>
