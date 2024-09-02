@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import '@twa-dev/sdk';
 
-import { Root } from '@/components/Root';
+import { Root } from 'components/Root.tsx';
 
 import '@telegram-apps/telegram-ui/dist/styles.css';
 import './index.css';

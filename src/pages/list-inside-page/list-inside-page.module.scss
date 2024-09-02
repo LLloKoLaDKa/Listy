@@ -1,0 +1,23 @@
+.inside_container {
+    padding: 8px;
+    gap: 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add_new_point {
+    margin-bottom: 100px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.new_point_title {
+    margin: 0px auto !important;
+    text-align: center;
+}
+
+.description_multiline {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
     "lib": [
       "ES2020",
       "DOM",
-      "DOM.Iterable"
+      "DOM.Iterable",
+      "ESNext.Array"
     ],
     "module": "ESNext",
     "moduleResolution": "bundler",
@@ -26,7 +28,8 @@
     "useDefineForClassFields": true
   },
   "include": [
-    "src"
+    "src",
+    "src/app/svg.d.ts"
   ],
   "references": [
     {

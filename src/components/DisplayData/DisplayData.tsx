@@ -1,8 +1,8 @@
 import { Cell, Checkbox, Section } from '@telegram-apps/telegram-ui';
 import type { FC, ReactNode } from 'react';
 
-import { RGB } from '@/components/RGB/RGB.tsx';
-import { Link } from '@/components/Link/Link.tsx';
+import { RGB } from 'components/RGB/RGB.tsx';
+import { Link } from 'components/Link/Link.tsx';
 
 import './DisplayData.css';
 

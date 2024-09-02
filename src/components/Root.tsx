@@ -1,9 +1,11 @@
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
-import { type FC, useEffect, useMemo } from 'react';
+import React, { type FC, useEffect, useMemo } from 'react';
 import WebApp from '@twa-dev/sdk';
-
-import { App } from '@/components/App.tsx';
-import { ErrorBoundary } from '@/components/ErrorBoundary.tsx';
+import { SDKProvider } from '@telegram-apps/sdk-react';
+import { App } from 'components/App.tsx';
+import { ErrorBoundary } from 'components/ErrorBoundary.tsx';
+import {Provider} from "react-redux";
+import {store} from "store";
 
 const ErrorBoundaryError: FC<{ error: unknown }> = ({ error }) => (
   <div>
@@ -22,9 +24,9 @@ const ErrorBoundaryError: FC<{ error: unknown }> = ({ error }) => (
 
 const Inner: FC = () => {
   const debug = WebApp.initDataUnsafe.start_param === 'debug';
-  const manifestUrl = useMemo(() => {
-    return new URL('tonconnect-manifest.json', window.location.href).toString();
-  }, []);
+  // const manifestUrl = useMemo(() => {
+  //   return new URL('tonconnect-manifest.json', window.location.href).toString();
+  // }, []);
 
   // Enable debug mode to see all the methods sent and events received.
   useEffect(() => {
@@ -34,9 +36,11 @@ const Inner: FC = () => {
   }, [debug]);
 
   return (
-    <TonConnectUIProvider manifestUrl={manifestUrl}>
-      <App/>
-    </TonConnectUIProvider>
+    // <TonConnectUIProvider manifestUrl={manifestUrl}>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    // </TonConnectUIProvider>
   );
 };
 

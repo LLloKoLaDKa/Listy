@@ -1,14 +1,15 @@
 import type { ComponentType, JSX } from 'react';
 
-import { IndexPage } from '@/pages/IndexPage/IndexPage';
-import { InitDataPage } from '@/pages/InitDataPage/InitDataPage';
-import { LaunchParamsPage } from '@/pages/LaunchParamsPage/LaunchParamsPage.tsx';
-import { ThemeParamsPage } from '@/pages/ThemeParamsPage/ThemeParamsPage.tsx';
-import { TONConnectPage } from '@/pages/TONConnectPage/TONConnectPage';
-import ListsPage from "@/pages/ListsPage/ListsPage.tsx";
-import {AddListPage} from "@/pages/AddListPage/AddListPage.tsx";
+import { InitDataPage } from 'pages/init-data-page/InitDataPage';
+import { LaunchParamsPage } from 'pages/launch-params-page/LaunchParamsPage.tsx';
+import { ThemeParamsPage } from 'pages/theme-params-page/ThemeParamsPage.tsx';
+import { TONConnectPage } from 'pages/ton-connect-page/TONConnectPage';
+import ListsPage from "pages/lists-page/ListsPage.tsx";
+import {AddListPage} from "pages/list-add-page/AddListPage.tsx";
 import React from "react";
-import IconsPage from "@/pages/IconsPage/IconsPage.tsx";
+import IconsPage from "pages/icons-page/IconsPage.tsx";
+import {IndexPage} from "pages/index-page/IndexPage.tsx";
+import {ListInsidePage} from "pages/list-inside-page/ListInsidePage.tsx";
 
 interface Route {
   path: string;
@@ -19,8 +20,11 @@ interface Route {
 
 export const routes: Route[] = [
   { path: '/', Component:  ListsPage },
-  { path: '/icons', Component: IconsPage, title: 'Icons' },
   { path: '/add', Component: AddListPage, title: 'Add List' },
+  { path: '/list/:id', Component: ListInsidePage, title: 'CurrentList' },
+
+  { path: '/icons', Component: IconsPage, title: 'Icons' },
+  { path: '/data', Component: IndexPage, title: 'Index' },
   { path: '/init-data', Component: InitDataPage, title: 'Init Data' },
   { path: '/theme-params', Component: ThemeParamsPage, title: 'Theme Params' },
   { path: '/launch-params', Component: LaunchParamsPage, title: 'Launch Params' },
