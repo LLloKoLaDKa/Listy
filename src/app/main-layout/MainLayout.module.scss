@@ -8,3 +8,11 @@
 .bottom_menu {
     display: flex;
 }
+
+.menu {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    background: var(--tgui--section_bg_color);
+    width: 100%;
+}

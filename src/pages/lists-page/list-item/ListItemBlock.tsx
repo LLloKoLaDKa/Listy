@@ -105,7 +105,7 @@ export const ListItemBlock = ({list}:IProps) => {
             onTouchStart={onTouchStart}
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
-            onClick={() => setTimeout(() => navigate(`list/${list.id}`), 300)}
+            onClick={() => navigate(`list/${list.id}`)}
             key={list.id}
             titleBadge={<Badge type="dot"  />}
             before={<Avatar size={48}/>}

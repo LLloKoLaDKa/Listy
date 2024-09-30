@@ -3,6 +3,7 @@ import {Icon24QR} from "@telegram-apps/telegram-ui/dist/icons/24/qr";
 import {Icon24Channel} from "@telegram-apps/telegram-ui/dist/icons/24/channel";
 import {Icon28Stats} from "@telegram-apps/telegram-ui/dist/icons/28/stats";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
+import styles from './MainLayout.module.scss'
 
 export const MainLayout = () => {
     const navigate = useNavigate();
@@ -11,19 +12,19 @@ export const MainLayout = () => {
     const tabs = [
         {
             id: 0,
-            text: 'Списки',
+            // text: 'Списки',
             Icon: <Icon24QR/>,
             href: '/'
         },
         {
             id: 1,
-            text: 'Профиль',
+            // text: 'Профиль',
             Icon: <Icon24Channel/>,
             href: '/icons'
         },
         {
             id: 2,
-            text: 'Данные',
+            // text: 'Данные',
             Icon: <Icon28Stats/>,
             href: '/data'
         },
@@ -34,14 +35,14 @@ export const MainLayout = () => {
             <Outlet/>
         </div>
 
-        <Tabbar>
+        <div className={styles.menu}>
             {
                 tabs.map(({
-                    id,
-                    text,
-                    Icon,
-                    href
-                }) => <Tabbar.Item
+                              id,
+                              text,
+                              Icon,
+                              href
+                          }) => <Tabbar.Item
                     key={id}
                     text={text}
                     selected={location.pathname === href}
@@ -52,6 +53,6 @@ export const MainLayout = () => {
                     {Icon}
                 </Tabbar.Item>)
             }
-        </Tabbar>
+        </div>
     </div>
 }

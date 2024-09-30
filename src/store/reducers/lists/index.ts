@@ -5,13 +5,21 @@ import {sortByIndex, sortByIndexDesc} from "helpers/ListsHelper.ts";
 import {IEditListName} from "store/reducers/lists/reducer-models/IEditListName.ts";
 import {IEditListDescription} from "store/reducers/lists/reducer-models/IEditListDescription.ts";
 import {ICreateListItem} from "store/reducers/lists/reducer-models/ICreateListItem.ts";
+import {ICheckedListItem} from "store/reducers/lists/reducer-models/ICheckedListItem.ts";
+import {synchronizeOpenedList, synchronizeOpenedListItem} from "store/reducers/lists/tools.ts";
+import {IEditListItem} from "store/reducers/lists/reducer-models/IEditListItem.ts";
+import ListItem from "models/store/ListItem.ts";
 
 export interface IListsState {
-    lists: List[]
+    lists: List[],
+    openedList: List | undefined,
+    editableList: ListItem | undefined,
 }
 
 const initialState: IListsState = {
-    lists: []
+    lists: [],
+    openedList: undefined,
+    editableList: undefined
 }
 
 export const listsSlicer = createSlice({
@@ -26,6 +34,9 @@ export const listsSlicer = createSlice({
         },
         removeList: (state: IListsState, action: PayloadAction<string>) => {
             state.lists = state.lists.filter(l => l.id !== action.payload)
+        },
+        setOpenedList: (state: IListsState, action: PayloadAction<string>) => {
+            state.openedList = state.lists.find(l => l.id === action.payload)
         },
         editListName: (state: IListsState, action: PayloadAction<IEditListName>) => {
             const list = state.lists.find(l => l.id == action.payload.id)
@@ -66,28 +77,49 @@ export const listsSlicer = createSlice({
         addListItem: (state: IListsState, action: PayloadAction<ICreateListItem>) => {
             const list = state.lists.find(l => l.id == action.payload.listId)
             if (!list) return;
-            else list.items.push(action.payload.newItem)
+
+            list.items.push(action.payload.newItem)
         },
-    }
+        editListItem: (state: IListsState, action: PayloadAction<IEditListItem>) => {
+            const list = state.lists.find(l => l.id == action.payload.listId)
+            if (!list) return;
+
+            list.items = list.items.filter(item => item.id !== action.payload.newItem.id)
+            list.items.push(action.payload.newItem)
+        },
+        setListItemChecked: (state: IListsState, action: PayloadAction<ICheckedListItem>) => {
+            const list = state.lists.find(l => l.id == action.payload.listId)
+            if (!list) return;
+
+            const listItem = list.items.find(item => item.id == action.payload.listItemId)
+            if (!listItem) return;
+
+            listItem.checked = action.payload.newValue
+        },
+        setEditableList: (state: IListsState, action: PayloadAction<ListItem>) => {
+            state.editableList = action.payload
+        }
+    },
 })
 
 export const {
     setLists,
     addList,
+    setOpenedList,
     removeList,
     pinList,
     unpinList,
     editListName,
     editListDescription,
-    addListItem
+    addListItem,
+    editListItem,
+    setListItemChecked,
+    setEditableList,
 } = listsSlicer.actions
 
 export const selectLists = (state:RootState) => state.lists.lists
-export const selectListItems = createSelector(
-    [
-        (state: RootState) => state.lists,
-        (state: RootState, id: string) => id
-    ],(lists: List[], id: string) => lists.find(l => l.id == id)?.items
-)
+export const selectOpenedList = (state:RootState) => state.lists.openedList
+export const selectOpenedListItems = (state:RootState) => state.lists.openedList?.items
+export const selectListById = (state:RootState, id: string) => state.lists.lists.find(l => l.id == id)
 
 export default listsSlicer.reducer
